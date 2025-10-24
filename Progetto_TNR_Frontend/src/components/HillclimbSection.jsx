@@ -46,11 +46,17 @@ export default function HillclimbSection() {
             do {
                 newIndex = Math.floor(Math.random() * images.length);
             } while (newIndex === randomIndex)
-            setRandomIndex(newIndex)
-            console.log(randomIndex)
-            setCurrentImage(images[newIndex]);
+                const nextImage = new Image()
+                nextImage.src = images[newIndex]
 
-        }, 2000);
+                nextImage.onload = () => {
+                    setRandomIndex(newIndex)
+                    console.log(randomIndex)
+                    setCurrentImage(images[newIndex]);
+                }
+
+
+            }, 2000);
         return () => clearInterval(interval);
     }, [randomIndex, images]);
 
