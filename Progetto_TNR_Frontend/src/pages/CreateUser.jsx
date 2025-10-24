@@ -84,12 +84,12 @@ export default function CreateUser() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-zinc-900 to-zinc-800 flex items-center justify-center py-10">
       <Card className="w-full max-w-4xl shadow-2xl border border-zinc-700 bg-zinc-900/80 backdrop-blur">
-        <CardHeader className="flex justify-between items-center border-b border-zinc-700">
+        <Card.Header className="flex justify-between items-center border-b border-zinc-700">
           <div className="flex items-center gap-3">
             <Speedometer2 size={28} className="text-red-500" />
-            <CardTitle className="text-xl font-bold text-white">
+            <Card.Title className="text-xl font-bold text-white">
               Crea Nuovo Utente
-            </CardTitle>
+            </Card.Title>
           </div>
           <Button
             onClick={handleSave}
@@ -99,9 +99,9 @@ export default function CreateUser() {
             <CheckCircle className="mr-2" size={18} />
             {loading ? "Salvataggio..." : "Salva"}
           </Button>
-        </CardHeader>
+        </Card.Header>
 
-        <CardContent className="p-6 space-y-4">
+        <Card.Content className="p-6 space-y-4">
           {message && (
             <Alert
               className={`${
@@ -236,7 +236,7 @@ export default function CreateUser() {
               </div>
             </div>
           </div>
-        </CardContent>
+        </Card.Content>
       </Card>
     </div>
   );
