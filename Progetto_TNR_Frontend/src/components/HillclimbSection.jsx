@@ -34,7 +34,7 @@ export default function HillclimbSection() {
             //const randomIndex = Math.floor(Math.random() * images.length);
             setCurrentImage(images[randomIndex]);
             if (randomIndex < (images.length - 1)) {
-                setRandomIndex(randomIndex++);
+                setRandomIndex(randomIndex + 1);
             } else {
                 setRandomIndex(0);
             }
