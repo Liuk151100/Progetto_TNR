@@ -29,7 +29,7 @@ export default function HillclimbSection() {
     // Cambia immagine ogni 2 secondi in modo casuale
     useEffect(() => {
         const interval = setInterval(() => {
-            const randomIndex = Math.floor(Math.random() * images.length);
+            const randomIndex = Math.floor(Math.random() * (images.length -1));
             setCurrentImage(images[randomIndex]);
         }, 2000);
         return () => clearInterval(interval);
