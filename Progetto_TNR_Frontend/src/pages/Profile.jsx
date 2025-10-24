@@ -8,7 +8,6 @@ import {
   Button,
   Image,
   ListGroup,
-  InputGroup,
   Badge,
 } from "react-bootstrap";
 import {
@@ -48,20 +47,16 @@ const UserProfile = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    if (name !== "password") {
-      setUser({ ...user, [name]: value });
-    } else if (value !== "") {
-      setUser({ ...user, [name]: value });
-    }
+    if (name !== "password") setUser({ ...user, [name]: value });
+    else if (value !== "") setUser({ ...user, [name]: value });
   };
 
-  // ✅ Quando l’utente seleziona un nuovo file immagine
   const handleAvatarUpload = (e) => {
     const file = e.target.files[0];
     if (file) {
       setNewAvatarFile(file);
       const imageUrl = URL.createObjectURL(file);
-      setUser((prev) => ({ ...prev, avatar: imageUrl })); // anteprima
+      setUser((prev) => ({ ...prev, avatar: imageUrl }));
     }
   };
 
@@ -72,17 +67,9 @@ const UserProfile = () => {
       formData.append("cognome", user.cognome);
       formData.append("email", user.email);
       formData.append("dataDiNascita", user.dataDiNascita);
-
-      // Se l’utente ha caricato un nuovo avatar, aggiungilo come File
-      if (newAvatarFile) {
-        formData.append("avatar", newAvatarFile);
-      } else {
-        formData.append("avatar", user.avatar);
-      }
-
-      if (user.password !== "") {
-        formData.append("password", user.password);
-      }
+      if (newAvatarFile) formData.append("avatar", newAvatarFile);
+      else formData.append("avatar", user.avatar);
+      if (user.password !== "") formData.append("password", user.password);
 
       await axiosInstance.patch(`/users/avatar/${loggedUser?._id}`, formData, {
         headers: { "Content-Type": "multipart/form-data" },
@@ -99,9 +86,7 @@ const UserProfile = () => {
       await axiosInstance.patch(
         `/users/docPersonali/${loggedUser?._id}`,
         docData,
-        {
-          headers: { "Content-Type": "multipart/form-data" },
-        }
+        { headers: { "Content-Type": "multipart/form-data" } }
       );
 
       setEditMode(false);
@@ -123,7 +108,6 @@ const UserProfile = () => {
     try {
       const updatedDocs = user.docPersonali.filter((_, i) => i !== index);
       setUser((prev) => ({ ...prev, docPersonali: updatedDocs }));
-
       const formData = new FormData();
       formData.append("docPersonali", JSON.stringify(updatedDocs));
 
@@ -150,19 +134,21 @@ const UserProfile = () => {
   };
 
   return (
-    <div className="profile-bg" style={{ height: editMode ? "100vh" : "80vh" }}>
-      <Container className="py-4" style={{height:"100%"}}>
-        <Card className="shadow-lg profile-card">
-          <Card.Header className="d-flex justify-content-between align-items-center profile-header">
-            <div className="d-flex align-items-center gap-2">
-              <Speedometer2 size={26} />
+    <div className="profile-bg py-4" style={{ minHeight: "100vh" }}>
+      <Container>
+        <Card className="shadow-lg border-0 rounded-4">
+          {/* HEADER */}
+          <Card.Header className="d-flex flex-column flex-md-row justify-content-between align-items-center bg-light py-3 px-4">
+            <div className="d-flex align-items-center gap-2 mb-3 mb-md-0">
+              <Speedometer2 size={24} />
               <h4 className="mb-0 fw-bold text-uppercase">Profilo Utente</h4>
             </div>
-            <div>
+
+            <div className="d-flex flex-wrap justify-content-center gap-2">
               <Button
-                variant="danger"
+                variant="outline-danger"
                 onClick={() => handleRemoveUser(loggedUser._id)}
-                className="fw-bold me-3"
+                className="fw-bold"
               >
                 <Trash className="me-2" />
                 Elimina account
@@ -185,17 +171,20 @@ const UserProfile = () => {
             </div>
           </Card.Header>
 
-          <Card.Body>
-            <Row className="align-items-center mb-4">
-              <Col md={3} className="text-center">
-                <div className="avatar-wrapper mx-auto position-relative">
+          {/* BODY */}
+          <Card.Body className="p-4">
+            <Row className="align-items-center gy-4">
+              {/* Avatar e info utente */}
+              <Col xs={12} md={4} className="text-center">
+                <div className="position-relative mx-auto">
                   <Image
                     src={user?.avatar}
                     roundedCircle
-                    width={160}
-                    height={160}
+                    width={150}
+                    height={150}
                     alt="Avatar utente"
-                    className="shadow avatar-img"
+                    className="shadow-sm"
+                    style={{ objectFit: "cover" }}
                   />
                   {editMode && (
                     <>
@@ -222,16 +211,19 @@ const UserProfile = () => {
                   {user?.nome} {user?.cognome}
                 </h5>
 
-                <Badge bg="danger" className="me-2">
-                  {user?.ruolo}
-                </Badge>
-                <Badge bg="secondary">{user?.categoria}</Badge>
+                <div className="mt-2">
+                  <Badge bg="danger" className="me-2">
+                    {user?.ruolo}
+                  </Badge>
+                  <Badge bg="secondary">{user?.categoria}</Badge>
+                </div>
               </Col>
 
-              <Col md={9}>
+              {/* Form dati utente */}
+              <Col xs={12} md={8}>
                 <Form>
-                  <Row className="mb-3">
-                    <Col md={6}>
+                  <Row className="g-3">
+                    <Col xs={12} sm={6}>
                       <Form.Group>
                         <Form.Label>Nome</Form.Label>
                         <Form.Control
@@ -243,7 +235,8 @@ const UserProfile = () => {
                         />
                       </Form.Group>
                     </Col>
-                    <Col md={6}>
+
+                    <Col xs={12} sm={6}>
                       <Form.Group>
                         <Form.Label>Cognome</Form.Label>
                         <Form.Control
@@ -256,7 +249,7 @@ const UserProfile = () => {
                       </Form.Group>
                     </Col>
 
-                    <Col md={6}>
+                    <Col xs={12} sm={6}>
                       <Form.Group>
                         <Form.Label>Email</Form.Label>
                         <Form.Control
@@ -269,7 +262,7 @@ const UserProfile = () => {
                       </Form.Group>
                     </Col>
 
-                    <Col md={6}>
+                    <Col xs={12} sm={6}>
                       <Form.Group>
                         <Form.Label>Data di Nascita</Form.Label>
                         <Form.Control
@@ -282,7 +275,7 @@ const UserProfile = () => {
                       </Form.Group>
                     </Col>
 
-                    <Col md={6}>
+                    <Col xs={12} sm={6}>
                       <Form.Group>
                         <Form.Label>Password</Form.Label>
                         <Form.Control
@@ -300,18 +293,18 @@ const UserProfile = () => {
               </Col>
             </Row>
 
-            <hr className="border-danger opacity-75" />
-            <h5 className="mb-3">
+            {/* Documenti Personali */}
+            <hr className="my-4 border-danger opacity-75" />
+            <h5 className="fw-bold mb-3 text-uppercase">
               <PersonFill className="me-2" />
               Documenti Personali
             </h5>
-            <hr className="border-danger opacity-75" />
 
             <ListGroup>
               {user?.docPersonali?.map((doc, idx) => (
                 <ListGroup.Item
                   key={idx}
-                  className="d-flex justify-content-between align-items-center"
+                  className="d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center gap-2"
                 >
                   {doc instanceof File ? (
                     <span>File da caricare: {doc.name}</span>
@@ -321,6 +314,7 @@ const UserProfile = () => {
                       download={doc.originalName || "documento"}
                       target="_blank"
                       rel="noreferrer"
+                      className="text-decoration-none text-dark"
                     >
                       {doc.originalName || doc.path.split("/").pop()}
                     </a>
@@ -328,7 +322,7 @@ const UserProfile = () => {
 
                   {editMode && (
                     <Button
-                      variant="danger"
+                      variant="outline-danger"
                       size="sm"
                       onClick={() => handleRemoveDoc(idx)}
                     >

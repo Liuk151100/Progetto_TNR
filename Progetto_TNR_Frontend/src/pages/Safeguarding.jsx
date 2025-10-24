@@ -4,7 +4,6 @@ import { FileEarmarkPdf, Paperclip, Send } from "react-bootstrap-icons";
 import axiosInstance from "../../data/axios";
 
 const Safeguarding = () => {
-
     const [formData, setFormData] = useState({
         nome: "",
         email: "",
@@ -15,8 +14,6 @@ const Safeguarding = () => {
     const [alert, setAlert] = useState({ show: false, variant: "", text: "" });
     const [sending, setSending] = useState(false);
 
-
-    // Lista di documenti disponibili
     const documents = [
         {
             title: "1. MODULO ACCETTAZIONE_TESSERATO_MODULISTICA_ACI",
@@ -50,14 +47,11 @@ const Safeguarding = () => {
         setSending(true);
 
         try {
-            // Costruzione del FormData per invio file
-            console.log(formData)
             const form = new FormData();
             form.append("nome", formData.nome);
             form.append("email", formData.email);
             form.append("messaggio", formData.messaggio);
             formData.files.forEach((file) => form.append("allegati", file));
-            console.log(form)
 
             await axiosInstance.post("/safeguarding", form, {
                 headers: { "Content-Type": "multipart/form-data" },
@@ -69,10 +63,7 @@ const Safeguarding = () => {
                 text: "Segnalazione inviata correttamente! Ti ricontatteremo al più presto.",
             });
 
-            setTimeout(() => {
-                window.location.reload();
-            }, 1000);
-
+            setTimeout(() => window.location.reload(), 1000);
         } catch (error) {
             console.error(error);
             setAlert({
@@ -92,34 +83,33 @@ const Safeguarding = () => {
             </h2>
 
             {/* SEZIONE DOCUMENTI */}
-            <div className="d-flex flex-column align-items-center" style={{width:"100vw"}}>
-
+            <Row className="g-4 justify-content-center">
                 {documents.map((doc, index) => (
-                    <Row className="mb-5" key={index} style={{ width: "80%" }}>
+                    <Col key={index} xs={12} sm={10} md={8} lg={6}>
                         <Card className="shadow-sm h-100 border-0 rounded-3">
-                            <Card.Body className="d-flex flex-raw justify-content-between" style={{ width: "100%" }}>
-                                <div className="d-flex flex-raw align-items-center">
-                                    <FileEarmarkPdf size={40} className="text-danger mb-3" />
-                                    <h5 style={{ marginLeft: "10px", height: "30px", lineHeight: "30px" }}>{doc.title}</h5>
+                            <Card.Body className="d-flex flex-column flex-md-row align-items-start align-items-md-center justify-content-between">
+                                <div className="d-flex align-items-center mb-3 mb-md-0">
+                                    <FileEarmarkPdf size={40} className="text-danger" />
+                                    <h6 className="ms-3 mb-0 text-break">
+                                        {doc.title}
+                                    </h6>
                                 </div>
                                 <Button
                                     variant="outline-danger"
                                     href={doc.file}
                                     download
                                     className="fw-bold"
-                                    style={{ height: "40px", lineHeight: "40px", textAlign: "center", boxSizing: "content-box" }}
                                 >
                                     Scarica PDF
                                 </Button>
                             </Card.Body>
                         </Card>
-                    </Row>
+                    </Col>
                 ))}
-
-            </div>
+            </Row>
 
             {/* SEZIONE SEGNALAZIONE */}
-            <Card className="shadow-lg border-0 rounded-4 p-4 mx-auto" style={{ maxWidth: "700px" }}>
+            <Card className="shadow-lg border-0 rounded-4 p-4 mx-auto mt-5" style={{ maxWidth: "700px" }}>
                 <Card.Body>
                     <h4 className="fw-bold mb-4 text-center">
                         Invia una Segnalazione
