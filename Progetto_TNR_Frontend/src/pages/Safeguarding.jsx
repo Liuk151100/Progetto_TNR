@@ -105,6 +105,7 @@ const Safeguarding = () => {
                       height: "48px",
                       minWidth: "160px",
                       fontSize: "0.9rem",
+                      lineHeight: height,
                       flexShrink: 0,
                     }}
                   >
