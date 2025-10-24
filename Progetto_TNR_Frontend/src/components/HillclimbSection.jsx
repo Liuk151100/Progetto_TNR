@@ -4,16 +4,16 @@ import { Button, Container } from "react-bootstrap";
 export default function HillclimbSection() {
     // Lista delle immagini presenti nella cartella assets
     const images = [
-        "./HillClimbSection/HillClimbRaces_1.jpeg",
-        "./HillClimbSection/HillClimbRaces_2.jpeg",
-        "./HillClimbSection/HillClimbRaces_3.jpeg",
-        "./HillClimbSection/HillClimbRaces_4.jpeg",
-        "./HillClimbSection/HillClimbRaces_5.jpeg",
-        "./HillClimbSection/HillClimbRaces_6.jpeg",
-        "./HillClimbSection/HillClimbRaces_7.jpeg",
-        "./HillClimbSection/HillClimbRaces_8.jpeg",
-        "./HillClimbSection/HillClimbRaces_9.jpeg",
-        "./HillClimbSection/HillClimbRaces_10.jpeg",
+        "./assets/HillClimbSection/HillClimbRaces_1.jpeg",
+        "./assets/HillClimbSection/HillClimbRaces_2.jpeg",
+        "./assets/HillClimbSection/HillClimbRaces_3.jpeg",
+        "./assets/HillClimbSection/HillClimbRaces_4.jpeg",
+        "./assets/HillClimbSection/HillClimbRaces_5.jpeg",
+        "./assets/HillClimbSection/HillClimbRaces_6.jpeg",
+        "./assets/HillClimbSection/HillClimbRaces_7.jpeg",
+        "./assets/HillClimbSection/HillClimbRaces_8.jpeg",
+        "./assets/HillClimbSection/HillClimbRaces_9.jpeg",
+        "./assets/HillClimbSection/HillClimbRaces_10.jpeg",
     ];
 
     const [currentImage, setCurrentImage] = useState(images[0]);
