@@ -33,9 +33,9 @@ export default function LegendsSection() {
             //const randomIndex = Math.floor(Math.random() * images.length);
             setCurrentImage(images[randomIndex]);
             if (randomIndex < (images.length - 1)) {
-                randomIndex++;
+                setRandomIndex(randomIndex++);
             } else {
-                randomIndex = 0;
+                setRandomIndex(0);
             }
         }, 2000);
         return () => clearInterval(interval);
