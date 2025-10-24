@@ -1,17 +1,31 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardContent,
-} from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
-import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
-import { Alert, AlertDescription } from "@/components/ui/alert";
-import { CheckCircle, Upload, Speedometer2 } from "lucide-react";
+    Container,
+    Row,
+    Col,
+    Card,
+    Form,
+    Button,
+    Image,
+    ListGroup,
+    InputGroup,
+    Badge,
+    Alert,
+} from "react-bootstrap";
+import {
+    PencilSquare,
+    CheckCircle,
+    PlusCircle,
+    Upload,
+    Speedometer2,
+    PersonFill,
+    Border,
+    FileX,
+} from "react-bootstrap-icons";
+import axios from "axios";
 import axiosInstance from "../../data/axios";
+import { useAuthContext } from "../contexts/authContext";
+import { useNavigate } from "react-router-dom";
 
 export default function CreateUser() {
   const [user, setUser] = useState({
