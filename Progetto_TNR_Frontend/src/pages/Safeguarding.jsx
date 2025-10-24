@@ -92,7 +92,7 @@ const Safeguarding = () => {
             </h2>
 
             {/* SEZIONE DOCUMENTI */}
-            <div className="d-flex flex-column align-items-center">
+            <div className="d-flex flex-column align-items-center" style={{width:"100vw"}}>
 
                 {documents.map((doc, index) => (
                     <Row className="mb-5" key={index} style={{ width: "80%" }}>

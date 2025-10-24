@@ -22,19 +22,32 @@ export default function KartSection() {
         return () => window.removeEventListener("resize", handleResize);
     }, []);
 
+    function preloadImages(images) {
+        images.forEach((src) => {
+            const img = new Image()
+            img.src = src
+        })
+    }
+
+    useEffect(() => {
+        preloadImages(images)
+    }, [])
+
     // Cambia immagine ogni 2 secondi in modo casuale
     useEffect(() => {
+
         const interval = setInterval(() => {
-            //const randomIndex = Math.floor(Math.random() * images.length);
-            setCurrentImage(images[randomIndex]);
-            if (randomIndex < (images.length - 1)) {
-                setRandomIndex(randomIndex + 1);
-            } else {
-                setRandomIndex(0);
-            }
+            let newIndex
+            do {
+                newIndex = Math.floor(Math.random() * images.length);
+            } while (newIndex === randomIndex)
+            setRandomIndex(newIndex)
+            console.log(randomIndex)
+            setCurrentImage(images[newIndex]);
+
         }, 2000);
         return () => clearInterval(interval);
-    }, [images]);
+    }, [randomIndex, images]);
 
     // Gestione responsive
     const isMobile = windowWidth < 768;
