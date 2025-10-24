@@ -18,6 +18,7 @@ export default function HillclimbSection() {
 
     const [currentImage, setCurrentImage] = useState(images[0]);
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+    const [randomIndex,setRandomIndex] = useState(0)
 
     // Aggiorna la dimensione della finestra per il responsive
     useEffect(() => {
@@ -28,7 +29,7 @@ export default function HillclimbSection() {
 
     // Cambia immagine ogni 2 secondi in modo casuale
     useEffect(() => {
-        const randomIndex = 0;
+        
         const interval = setInterval(() => {
             //const randomIndex = Math.floor(Math.random() * images.length);
             setCurrentImage(images[randomIndex]);
