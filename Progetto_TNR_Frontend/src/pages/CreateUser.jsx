@@ -27,217 +27,219 @@ import axiosInstance from "../../data/axios";
 import { useAuthContext } from "../contexts/authContext";
 import { useNavigate } from "react-router-dom";
 
-export default function CreateUser() {
-  const [user, setUser] = useState({
-    nome: "",
-    cognome: "",
-    email: "",
-    password: "",
-    dataDiNascita: "",
-    avatar: "",
-    ruolo: "",
-    categoria: "",
-  });
+const CreateUser = () => {
+    const [editMode, setEditMode] = useState(false);
 
-  const [message, setMessage] = useState("");
-  const [status, setStatus] = useState(null);
-  const [loading, setLoading] = useState(false);
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setUser((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleSave = async () => {
-    try {
-      setLoading(true);
-      const formData = new FormData();
-      Object.entries(user).forEach(([key, value]) => {
-        formData.append(key, value);
-      });
-
-      const response = await axiosInstance.post("/users", formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
-
-      setStatus(response.status);
-      setMessage(response.data.message || "Utente creato con successo!");
-
-      setUser({
+    const [user, setUser] = useState({
         nome: "",
         cognome: "",
         email: "",
-        password: "",
         dataDiNascita: "",
         avatar: "",
         ruolo: "",
         categoria: "",
-      });
-    } catch (err) {
-      setStatus(err.response?.status || 500);
-      setMessage(err.response?.data?.message || "Errore durante la creazione utente.");
-    } finally {
-      setLoading(false);
-    }
-  };
+        docPersonali: [],
+    });
+    const { loggedUser } = useAuthContext();
 
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-zinc-900 to-zinc-800 flex items-center justify-center py-10">
-      <Card className="w-full max-w-4xl shadow-2xl border border-zinc-700 bg-zinc-900/80 backdrop-blur">
-        <Card.Header className="flex justify-between items-center border-b border-zinc-700">
-          <div className="flex items-center gap-3">
-            <Speedometer2 size={28} className="text-red-500" />
-            <Card.Title className="text-xl font-bold text-white">
-              Crea Nuovo Utente
-            </Card.Title>
-          </div>
-          <Button
-            onClick={handleSave}
-            disabled={loading}
-            className="bg-red-600 hover:bg-red-700 text-white font-semibold"
-          >
-            <CheckCircle className="mr-2" size={18} />
-            {loading ? "Salvataggio..." : "Salva"}
-          </Button>
-        </Card.Header>
+    var nextRequest
 
-        <Card.Content className="p-6 space-y-4">
-          {message && (
-            <Alert
-              className={`${
-                status >= 400 ? "bg-red-600/20 border-red-600" : "bg-green-600/20 border-green-600"
-              } text-white`}
-            >
-              <AlertDescription>{message}</AlertDescription>
-            </Alert>
-          )}
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
-            {/* Avatar Section */}
-            <div className="flex flex-col items-center gap-4">
-              <img
-                src={
-                  user.avatar ||
-                  "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png"
-                }
-                alt="Avatar preview"
-                className="w-40 h-40 rounded-full border-4 border-zinc-700 shadow-lg object-cover"
-              />
-              <div className="w-full">
-                <Label className="text-sm text-zinc-300">URL Avatar</Label>
-                <div className="flex gap-2 mt-2">
-                  <Input
-                    name="avatar"
-                    value={user.avatar}
-                    onChange={handleChange}
-                    placeholder="Inserisci URL immagine..."
-                    className="bg-zinc-800 border-zinc-700 text-white"
-                  />
-                  <Button variant="outline" className="border-zinc-700">
-                    <Upload size={18} />
-                  </Button>
-                </div>
-              </div>
-            </div>
+    const [newDoc, setNewDoc] = useState("");
+    const [message, setMessage] = useState("");
+    const [status, setStatus] = useState();
 
-            {/* Form Section */}
-            <div className="md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <Label className="text-sm text-zinc-300">Nome</Label>
-                <Input
-                  name="nome"
-                  value={user.nome}
-                  onChange={handleChange}
-                  placeholder="Inserisci nome"
-                  className="bg-zinc-800 border-zinc-700 text-white"
-                />
-              </div>
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setUser({ ...user, [name]: value });
+    };
 
-              <div>
-                <Label className="text-sm text-zinc-300">Cognome</Label>
-                <Input
-                  name="cognome"
-                  value={user.cognome}
-                  onChange={handleChange}
-                  placeholder="Inserisci cognome"
-                  className="bg-zinc-800 border-zinc-700 text-white"
-                />
-              </div>
+    const handleSave = async () => {
+        try {
+            const formData = new FormData();
+            formData.append("nome", user.nome);
+            formData.append("cognome", user.cognome);
+            formData.append("email", user.email);
+            formData.append("password", user.password)
+            formData.append("dataDiNascita", user.dataDiNascita);
+            formData.append("avatar", user.avatar);
+            formData.append("ruolo", user.ruolo);
+            formData.append("categoria", user.categoria);
 
-              <div>
-                <Label className="text-sm text-zinc-300">Email</Label>
-                <Input
-                  name="email"
-                  type="email"
-                  value={user.email}
-                  onChange={handleChange}
-                  placeholder="Inserisci email"
-                  className="bg-zinc-800 border-zinc-700 text-white"
-                />
-              </div>
+            const response = await axiosInstance.post(`/users`, formData, {
+                headers: { "Content-Type": "multipart/form-data" },
+            });
 
-              <div>
-                <Label className="text-sm text-zinc-300">Password</Label>
-                <Input
-                  name="password"
-                  type="text"
-                  value={user.password}
-                  onChange={handleChange}
-                  placeholder="Password primo accesso"
-                  className="bg-zinc-800 border-zinc-700 text-white"
-                />
-              </div>
+            console.log(response)
+            setMessage(response.data.message)
+            setStatus(response.status)
 
-              <div>
-                <Label className="text-sm text-zinc-300">Data di Nascita</Label>
-                <Input
-                  name="dataDiNascita"
-                  type="date"
-                  value={user.dataDiNascita}
-                  onChange={handleChange}
-                  className="bg-zinc-800 border-zinc-700 text-white"
-                />
-              </div>
+            setInterval(() => {
+                window.location.reload()
+            }, 1000);
+            
+            console.log("Dati aggiornati 1:", user);
+        } catch (err) {
+            console.error("Errore nel salvataggio:", err);
+            console.log(err.response)
+            setMessage(err.response.data.message)
+            setStatus(err.response.status)
+        }
+    };
 
-              <div>
-                <Label className="text-sm text-zinc-300">Ruolo</Label>
-                <Select
-                  value={user.ruolo}
-                  onValueChange={(val) => setUser((p) => ({ ...p, ruolo: val }))}
-                >
-                  <SelectTrigger className="bg-zinc-800 border-zinc-700 text-white">
-                    <SelectValue placeholder="Seleziona ruolo" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="Admin">👑 Admin</SelectItem>
-                    <SelectItem value="Pilota">🏎️ Pilota</SelectItem>
-                    <SelectItem value="Meccanico">🔧 Meccanico</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
 
-              <div>
-                <Label className="text-sm text-zinc-300">Categoria</Label>
-                <Select
-                  value={user.categoria}
-                  onValueChange={(val) =>
-                    setUser((p) => ({ ...p, categoria: val }))
-                  }
-                >
-                  <SelectTrigger className="bg-zinc-800 border-zinc-700 text-white">
-                    <SelectValue placeholder="Seleziona categoria" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="Kart">🏁 Kart</SelectItem>
-                    <SelectItem value="Legend Cars">🚗 Legend Cars</SelectItem>
-                    <SelectItem value="Hillclimb Cars">⛰️ Hillclimb Cars</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-            </div>
-          </div>
-        </Card.Content>
-      </Card>
-    </div>
-  );
-}
+    return (
+        <div className="profile-bg" style={{ height: editMode ? "100vh" : "80vh" }}>
+            <Container className="py-4">
+                <Card className="shadow-lg profile-card">
+                    <Card.Header className="d-flex justify-content-between align-items-center profile-header">
+                        <div className="d-flex align-items-center gap-2">
+                            <Speedometer2 size={26} />
+                            <h4 className="mb-0 fw-bold text-uppercase">Nuovo Utente</h4>
+                        </div>
+                        <Button variant="success" onClick={handleSave} className="fw-bold">
+                            <CheckCircle className="me-2" />
+                            Salva
+                        </Button>
+                    </Card.Header>
+
+                    <Card.Body>
+                        {message != "" && status >= 400  && <Alert className="bg-danger" style={{color:"black"}}>{message} </Alert>}
+                        {message != "" && status >= 200 && status < 400 && <Alert className="bg-success" style={{color:"black"}}>{message} </Alert>}
+                        <Row className="align-items-center mb-4">
+                            <Col md={3} className="text-center">
+                                <div className="avatar-wrapper mx-auto">
+                                    <Image
+                                        src={user?.avatar || "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png"}
+                                        roundedCircle
+                                        width={160}
+                                        height={160}
+                                        alt="Avatar utente"
+                                        className="shadow avatar-img"
+                                    />
+                                </div>
+
+                                <InputGroup className="mt-3">
+                                    <Form.Control
+                                        type="text"
+                                        placeholder="Nuovo URL avatar"
+                                        name="avatar"
+                                        value={user?.avatar}
+                                        onChange={handleChange}
+                                    />
+                                    <Button variant="outline-light">
+                                        <Upload />
+                                    </Button>
+                                </InputGroup>
+                            </Col>
+
+                            <Col md={9}>
+                                <Form>
+                                    <Row className="mb-3">
+                                        <Col md={6}>
+                                            <Form.Group className="mb-3">
+                                                <Form.Label>Nome</Form.Label>
+                                                <Form.Control
+                                                    type="text"
+                                                    name="nome"
+                                                    value={user ? user.nome : ""}
+                                                    onChange={handleChange}
+                                                    placeholder="Inserire nome"
+                                                />
+                                            </Form.Group>
+                                        </Col>
+                                        <Col md={6}>
+                                            <Form.Group className="mb-3">
+                                                <Form.Label>Cognome</Form.Label>
+                                                <Form.Control
+                                                    type="text"
+                                                    name="cognome"
+                                                    value={user ? user.cognome : ""}
+                                                    onChange={handleChange}
+                                                    placeholder="Inserire cognome"
+                                                />
+                                            </Form.Group>
+                                        </Col>
+
+                                        <Col md={6}>
+                                            <Form.Group className="mb-3">
+                                                <Form.Label>Email</Form.Label>
+                                                <Form.Control
+                                                    type="email"
+                                                    name="email"
+                                                    value={user ? user.email : ""}
+                                                    onChange={handleChange}
+                                                    placeholder="Inserire email utente"
+                                                />
+                                            </Form.Group>
+                                        </Col>
+                                        <Col md={6}>
+                                            <Form.Group className="mb-3">
+                                                <Form.Label>Password</Form.Label>
+                                                <Form.Control
+                                                    type="text"
+                                                    name="password"
+                                                    value={user ? user.password : ""}
+                                                    onChange={handleChange}
+                                                    placeholder="Inserire una password per primo accesso"
+                                                />
+                                            </Form.Group>
+                                        </Col>
+                                        <Col md={6}>
+                                            <Form.Group className="mb-3">
+                                                <Form.Label>Data di Nascita</Form.Label>
+                                                <Form.Control
+                                                    type="date"
+                                                    name="dataDiNascita"
+                                                    value={user ? user?.dataDiNascita : ""}
+                                                    onChange={handleChange}
+                                                />
+                                            </Form.Group>
+                                        </Col>
+                                        <Col md={6}>
+                                            <Form.Group className="mb-3">
+                                                <Form.Label>Ruolo nel Team</Form.Label>
+                                                <Form.Select
+                                                    name="ruolo"
+                                                    value={user ? user.ruolo : ""}
+                                                    onChange={handleChange}
+                                                    className="shadow-sm rounded-3"
+                                                    style={{ maxWidth: "456px", fontSize: "1rem", padding: "0.5rem" }}
+                                                >
+                                                    <option value="" style={{ fontSize: "0.8rem", width: "10px" }}>Seleziona un ruolo</option>
+                                                    <option value="Admin" style={{ fontSize: "0.8rem" }}>👑 Admin</option>
+                                                    <option value="Pilota" style={{ fontSize: "0.8rem" }}>🏎️ Pilota</option>
+                                                    <option value="Meccanico" style={{ fontSize: "0.8rem" }}>🔧 Meccanico</option>
+                                                </Form.Select>
+                                            </Form.Group>
+                                        </Col>
+                                        <Col md={6}>
+                                            <Form.Group className="mb-3">
+                                                <Form.Label>Categoria</Form.Label>
+                                                <Form.Select
+                                                    name="categoria"
+                                                    value={user ? user.categoria : ""}
+                                                    onChange={handleChange}
+                                                    className="shadow-sm rounded-3"
+                                                    style={{ maxWidth: "456px", fontSize: "1rem", padding: "0.5rem" }}
+                                                >
+                                                    <option value="">Seleziona un ruolo</option>
+                                                    <option value="Kart">Kart</option>
+                                                    <option value="Legend Cars">Legend Cars</option>
+                                                    <option value="Hillclimb Cars">Hillclimb Cars</option>
+                                                </Form.Select>
+                                            </Form.Group>
+                                        </Col>
+                                    </Row>
+                                </Form>
+                            </Col>
+                        </Row>
+                    </Card.Body>
+                </Card>
+            </Container>
+        </div>
+    );
+};
+
+export default CreateUser;
+
