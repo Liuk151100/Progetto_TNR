@@ -24,8 +24,14 @@ export default function KartSection() {
     // Cambia immagine ogni 2 secondi in modo casuale
     useEffect(() => {
         const interval = setInterval(() => {
-            const randomIndex = Math.floor(Math.random() * (images.length - 1));
+            const randomIndex = 0;
+            //const randomIndex = Math.floor(Math.random() * images.length);
             setCurrentImage(images[randomIndex]);
+            if (randomIndex < (images.length - 1)) {
+                randomIndex++;
+            } else {
+                randomIndex = 0;
+            }
         }, 2000);
         return () => clearInterval(interval);
     }, [images]);
