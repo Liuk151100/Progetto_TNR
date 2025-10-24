@@ -32,7 +32,7 @@ export default function LegendsSection() {
         const interval = setInterval(() => {
             const randomIndex = Math.floor(Math.random() * images.length);
             console.log(randomIndex)
-            //setCurrentImage(images[randomIndex]);
+            setCurrentImage(images[randomIndex]);
         
         }, 2000);
         return () => clearInterval(interval);
@@ -57,7 +57,7 @@ export default function LegendsSection() {
                 style={{
                     width: "100%",
                     height: "100vh",
-                    backgroundImage: `url(${images[randomIndex]})`,
+                    backgroundImage: `url(${currentImage})`,
                     backgroundSize: "cover",
                     backgroundPosition: "center",
                     backgroundRepeat: "no-repeat",
