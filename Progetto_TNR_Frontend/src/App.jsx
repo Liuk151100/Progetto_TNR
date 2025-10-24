@@ -40,7 +40,7 @@ export default function App() {
     <BrowserRouter>
       <AuthProvider>
         {/* <div className={`app-root ${theme}`}> */}
-        <Header style={{position:"sticky", top: 0}}/>
+        <Header/>
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path="/auth/google-callback" element={<GoogleCallback />} />
