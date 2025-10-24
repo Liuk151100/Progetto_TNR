@@ -99,6 +99,7 @@ const Safeguarding = () => {
                                     href={doc.file}
                                     download
                                     className="fw-bold"
+                                    style={{height:"50px"}}
                                 >
                                     Scarica PDF
                                 </Button>
