@@ -30,14 +30,10 @@ export default function LegendsSection() {
     useEffect(() => {
 
         const interval = setInterval(() => {
-            //const randomIndex = Math.floor(Math.random() * images.length);
+            const randomIndex = Math.floor(Math.random() * images.length);
             console.log(randomIndex)
             //setCurrentImage(images[randomIndex]);
-            if (randomIndex < (images.length - 1)) {
-                setRandomIndex(randomIndex + 1);
-            } else {
-                setRandomIndex(0);
-            }
+        
         }, 2000);
         return () => clearInterval(interval);
     }, [images]);
