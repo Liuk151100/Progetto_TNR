@@ -71,7 +71,7 @@ export default function Header() {
   }
 
   return (
-    <header>
+    <header >
       <Navbar expand="lg" bg="light" className="px-3 py-2 shadow-sm">
         <Container fluid className="d-flex align-items-center justify-content-between">
           {/* LOGO */}
