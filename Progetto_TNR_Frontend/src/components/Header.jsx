@@ -68,6 +68,7 @@ export default function Header() {
   }, [location.pathname]);
 
   const scrollToContactUs = () => {
+    setExpanded(false);
     navigate("/");
     setTimeout(() => {
       window.scrollTo({
@@ -78,10 +79,12 @@ export default function Header() {
   };
 
   const scrollToTeam = () => {
+    setExpanded(false);
     navigate("/", { state: { scrollTo: "team" } });
   };
 
   const goToHome = () => {
+    setExpanded(false);
     navigate("/", { state: undefined });
   };
 
