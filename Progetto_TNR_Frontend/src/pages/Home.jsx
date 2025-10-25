@@ -28,6 +28,11 @@ export default function Home() {
     });
   }, [])
 
+  console.log(location.pathname)
+  useEffect(()=> {
+    window.location.reload()
+  },[location.pathname])
+
 
   return (
     <>

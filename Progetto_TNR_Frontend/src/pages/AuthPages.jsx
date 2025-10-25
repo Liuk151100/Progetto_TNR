@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axiosInstance from "../../data/axios";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export default function AuthPages() {
   const [isLogin, setIsLogin] = useState(true);
@@ -63,7 +63,11 @@ export default function AuthPages() {
     }
   };
 
-
+  const location = useLocation();
+  console.log(location.pathname)
+  useEffect(() => {
+    window.location.reload()
+  }, [location.pathname])
 
   return (
     <div

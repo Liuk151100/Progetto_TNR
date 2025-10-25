@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Card, Button, Form, Alert } from "react-bootstrap";
 import { FileEarmarkPdf, Paperclip, Send } from "react-bootstrap-icons";
 import axiosInstance from "../../data/axios";
+import { useLocation } from "react-router-dom";
 
 const Safeguarding = () => {
   const [formData, setFormData] = useState({
@@ -76,10 +77,14 @@ const Safeguarding = () => {
       setSending(false);
     }
   };
-
+  const location = useLocation();
+  console.log(location.pathname)
+  useEffect(() => {
+    window.location.reload()
+  }, [location.pathname])
 
   return (
-    <Container style={{marginTop: "70px",boxSizing: "content-box"}}>
+    <Container style={{ marginTop: "70px", boxSizing: "content-box" }}>
       <h2 className="text-center mb-5 fw-bold text-uppercase">
         Safeguarding e Documenti
       </h2>

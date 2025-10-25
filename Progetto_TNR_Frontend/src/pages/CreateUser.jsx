@@ -25,7 +25,7 @@ import {
 import axios from "axios";
 import axiosInstance from "../../data/axios";
 import { useAuthContext } from "../contexts/authContext";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const CreateUser = () => {
     const [editMode, setEditMode] = useState(false);
@@ -77,7 +77,7 @@ const CreateUser = () => {
             setInterval(() => {
                 window.location.reload()
             }, 1000);
-            
+
             console.log("Dati aggiornati 1:", user);
         } catch (err) {
             console.error("Errore nel salvataggio:", err);
@@ -86,11 +86,15 @@ const CreateUser = () => {
             setStatus(err.response.status)
         }
     };
-
+    const location = useLocation();
+    console.log(location.pathname)
+    useEffect(() => {
+        window.location.reload()
+    }, [location.pathname])
 
 
     return (
-        <div className="profile-bg" style={{ height: "100vh", marginTop: "65px",boxSizing: "content-box" }}>
+        <div className="profile-bg" style={{ height: "100vh", marginTop: "65px", boxSizing: "content-box" }}>
             <Container className="py-4">
                 <Card className="shadow-lg profile-card">
                     <Card.Header className="d-flex justify-content-between align-items-center profile-header">
@@ -105,8 +109,8 @@ const CreateUser = () => {
                     </Card.Header>
 
                     <Card.Body>
-                        {message != "" && status >= 400  && <Alert className="bg-danger" style={{color:"black"}}>{message} </Alert>}
-                        {message != "" && status >= 200 && status < 400 && <Alert className="bg-success" style={{color:"black"}}>{message} </Alert>}
+                        {message != "" && status >= 400 && <Alert className="bg-danger" style={{ color: "black" }}>{message} </Alert>}
+                        {message != "" && status >= 200 && status < 400 && <Alert className="bg-success" style={{ color: "black" }}>{message} </Alert>}
                         <Row className="align-items-center mb-4">
                             <Col md={3} className="text-center">
                                 <div className="avatar-wrapper mx-auto">

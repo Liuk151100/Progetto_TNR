@@ -9,7 +9,7 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 import Modal from "react-modal";
 import { useAuthContext } from "../contexts/authContext";
 import { Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import axiosInstance from "../../data/axios";
 
 const locales = { "it-IT": itLocale };
@@ -189,6 +189,11 @@ function EventCalendar() {
       setSelectedEvent(null);
     }
   };
+  const location = useLocation();
+  console.log(location.pathname)
+  useEffect(() => {
+    window.location.reload()
+  }, [location.pathname])
 
   return (
     <div
@@ -521,7 +526,7 @@ function EventCalendar() {
         )}
       </Modal>
 
-       {/* -------- MODALE DI AVVISO -------- */}
+      {/* -------- MODALE DI AVVISO -------- */}
       <Modal
         isOpen={modal2IsOpen}
         onRequestClose={() => setModal2IsOpen(false)}
