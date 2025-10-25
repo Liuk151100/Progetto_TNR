@@ -42,7 +42,6 @@ export default function KartSection() {
                 newIndex = Math.floor(Math.random() * images.length);
             } while (newIndex === randomIndex)
             setRandomIndex(newIndex)
-            console.log(randomIndex)
             setCurrentImage(images[newIndex]);
 
         }, 2000);

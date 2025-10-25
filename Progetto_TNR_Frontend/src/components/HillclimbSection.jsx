@@ -51,7 +51,6 @@ export default function HillclimbSection() {
 
                 nextImage.onload = () => {
                     setRandomIndex(newIndex)
-                    console.log(randomIndex)
                     setCurrentImage(images[newIndex]);
                 }
 

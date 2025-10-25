@@ -46,7 +46,6 @@ export default function LegendsSection() {
                 newIndex  = Math.floor(Math.random() * images.length);
             } while (newIndex === randomIndex)
             setRandomIndex(newIndex)
-            console.log(randomIndex)
             setCurrentImage(images[newIndex]);
         
         }, 2000);
