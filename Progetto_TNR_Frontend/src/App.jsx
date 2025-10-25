@@ -34,7 +34,7 @@ export default function App() {
   //   setTheme(t => (t === 'dark' ? 'light' : 'dark'));
   // };
   const location = useLocation();
-
+  console.log(location.pathname)
   useEffect(()=> {
     window.location.reload()
   },[location.pathname])
