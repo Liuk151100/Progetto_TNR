@@ -129,13 +129,14 @@ const CreateUser = () => {
                                     />
                                 </div>
 
-                                <InputGroup className="mt-3 mb-3" style={{height:"30px"}}>
+                                <InputGroup className="mt-3 mb-3" style={{height:"40px"}}>
                                     <Form.Control
                                         type="text"
                                         placeholder="Nuovo URL avatar"
                                         name="avatar"
                                         value={user?.avatar}
                                         onChange={handleChange}
+                                        style={{height:"100%"}}
                                     />
                                     <Form.Label
                                         htmlFor="avatarUpload"
