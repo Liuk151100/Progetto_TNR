@@ -193,7 +193,7 @@ function EventCalendar() {
     <div
       style={{
         padding: "20px",
-        height: "80vh",
+        height: "90vh",
         overflowY: "auto",
         display: "flex",
         flexDirection: "column",

@@ -34,6 +34,10 @@ export default function App() {
   //   setTheme(t => (t === 'dark' ? 'light' : 'dark'));
   // };
 
+  useEffect(()=> {
+    window.location.reload()
+  },[])
+
 
   return (
 
