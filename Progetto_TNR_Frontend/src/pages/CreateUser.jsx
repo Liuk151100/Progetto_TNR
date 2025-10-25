@@ -140,9 +140,9 @@ const CreateUser = () => {
                                     <Form.Label
                                         htmlFor="avatarUpload"
                                         className="btn btn-outline-secondary btn-sm mt-3"
-                                        style={{ cursor: "pointer" }}
+                                        style={{ cursor: "pointer", margin: "0" }}
                                     >
-                                        <Upload className="me-2" />
+                                        <Upload/>
                                     </Form.Label>
                                     <Form.Control
                                         id="avatarUpload"
