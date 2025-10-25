@@ -67,11 +67,17 @@ export default function Header() {
   }
 
   const goToHome = () => {
-    navigate("/", {state: undefined})
+    navigate("/", { state: undefined })
   }
 
   return (
-    <header >
+    <header style={{
+      position: "fixed",
+      top: 0,
+      left: 0,
+      width: "100%",
+      zIndex: 1000, // per stare sopra tutto
+    }}>
       <Navbar expand="lg" bg="light" className="px-3 py-2 shadow-sm">
         <Container fluid className="d-flex align-items-center justify-content-between">
           {/* LOGO */}
