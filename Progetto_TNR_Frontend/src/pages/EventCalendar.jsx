@@ -199,7 +199,8 @@ function EventCalendar() {
         overflowY: "auto",
         display: "flex",
         flexDirection: "column",
-        justifyContent: "center"
+        justifyContent: "center",
+        marginTop: "30px"
       }}
     >
       <h2 className="text-center mb-3">Calendario Eventi</h2>
