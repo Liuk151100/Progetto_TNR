@@ -135,8 +135,8 @@ const UserProfile = () => {
 
   return (
 
-      <Container style={{ height: "100vh", marginTop: "70px",boxSizing: "content-box"}}>
-        <Card className="shadow-lg border-0 rounded-4">
+      <Container >
+        <Card className="shadow-lg border-0 rounded-4" style={{ height: "100vh", marginTop: "70px",boxSizing: "content-box"}}>
           {/* HEADER */}
           <Card.Header className="d-flex flex-column flex-md-row justify-content-between align-items-center bg-light py-3 px-4">
             <div className="d-flex align-items-center gap-2 mb-3 mb-md-0">
