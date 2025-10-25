@@ -77,11 +77,7 @@ const Safeguarding = () => {
       setSending(false);
     }
   };
-  const location = useLocation();
-  console.log(location.pathname)
-  useEffect(() => {
-    window.location.reload()
-  }, [location.pathname])
+
 
   return (
     <Container style={{ marginTop: "70px", boxSizing: "content-box" }}>

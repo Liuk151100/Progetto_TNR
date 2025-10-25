@@ -3,11 +3,6 @@ import { Link, useLocation } from "react-router-dom";
 
 function NotFound() {
 
-  const location = useLocation();
-  console.log(location.pathname)
-  useEffect(() => {
-    window.location.reload()
-  }, [location.pathname])
 
   return (
     <Container className="text-center" style={{ height: "80vh", boxSizing: "border-box", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>

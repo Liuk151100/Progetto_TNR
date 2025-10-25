@@ -133,11 +133,6 @@ const UserProfile = () => {
     }
   };
 
-  const location = useLocation();
-  console.log(location.pathname)
-  useEffect(() => {
-    window.location.reload()
-  }, [location.pathname])
 
   return (
 
