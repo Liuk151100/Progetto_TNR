@@ -87,6 +87,15 @@ const CreateUser = () => {
         }
     };
 
+    const handleAvatarUpload = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            setNewAvatarFile(file);
+            const imageUrl = URL.createObjectURL(file);
+            setUser((prev) => ({ ...prev, avatar: imageUrl }));
+        }
+    };
+
 
 
     return (
@@ -128,9 +137,20 @@ const CreateUser = () => {
                                         value={user?.avatar}
                                         onChange={handleChange}
                                     />
-                                    <Button variant="outline-light">
-                                        <Upload />
-                                    </Button>
+                                    <Form.Label
+                                        htmlFor="avatarUpload"
+                                        className="btn btn-outline-secondary btn-sm mt-3"
+                                        style={{ cursor: "pointer" }}
+                                    >
+                                        <Upload className="me-2" />
+                                    </Form.Label>
+                                    <Form.Control
+                                        id="avatarUpload"
+                                        type="file"
+                                        accept="image/*"
+                                        onChange={handleAvatarUpload}
+                                        style={{ display: "none" }}
+                                    />
                                 </InputGroup>
                             </Col>
 
