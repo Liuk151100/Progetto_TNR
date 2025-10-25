@@ -129,7 +129,7 @@ const CreateUser = () => {
                                     />
                                 </div>
 
-                                <InputGroup className="mt-3">
+                                <InputGroup className="mt-3 mb-3" style={{height:"30px"}}>
                                     <Form.Control
                                         type="text"
                                         placeholder="Nuovo URL avatar"
@@ -139,8 +139,8 @@ const CreateUser = () => {
                                     />
                                     <Form.Label
                                         htmlFor="avatarUpload"
-                                        className="btn btn-outline-secondary btn-sm mt-3"
-                                        style={{ cursor: "pointer", margin: "0" }}
+                                        className="btn btn-outline-secondary btn-sm"
+                                        style={{ cursor: "pointer", margin: "0", height:"100%" }}
                                     >
                                         <Upload/>
                                     </Form.Label>
