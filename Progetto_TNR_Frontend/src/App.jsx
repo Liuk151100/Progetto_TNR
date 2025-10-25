@@ -47,9 +47,9 @@ export default function App() {
           <Route path='/events' element={<EventCalendar />} />
           <Route path="*" element={<NotFound />} />
           <Route path="/Login" element={<AuthPages />} />
-          <Route path="/me" element={<UserProfile />} />
-          <Route path="/newUser" element={<CreateUser />} />
-          <Route path="/safeguarding" element={<Safeguarding />} />
+          <Route path="/me" element={<UserProfile style={{height: "100vh",marginTop: "65px",boxSizing: "content-box"}}/>} />
+          <Route path="/newUser" element={<CreateUser style={{height: "100vh",marginTop: "65px",boxSizing: "content-box"}}/>} />
+          <Route path="/safeguarding" element={<Safeguarding style={{height: "100vh",marginTop: "65px",boxSizing: "content-box"}}/>} />
 
         </Routes>
         <Footer />
