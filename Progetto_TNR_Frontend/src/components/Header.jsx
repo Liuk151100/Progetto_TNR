@@ -4,6 +4,56 @@ import { PersonCircle } from "react-bootstrap-icons";
 import { useAuthContext } from "../contexts/authContext";
 import { Link, useNavigate, useLocation } from "react-router-dom"; // ⬅️ aggiunto useLocation
 
+const UserMenu = ({ token, logout, loggedUser }) => {
+
+  const location = useLocation(); // ⬅️ serve per sapere quando cambia la pagina
+
+  // Stato per gestire il menu mobile
+  const [expanded, setExpanded] = useState(false);
+
+  // Ogni volta che cambia il path → richiudi il menu
+  useEffect(() => {
+    setExpanded(false);
+  }, [location.pathname]);
+
+  if (!token) {
+    return (
+      <Button
+        variant="dark"
+        size="sm"
+        as={Link}
+        to="/Login"
+        className="ms-3 fw-bold"
+        style={{ borderRadius: "20px" }}
+      >
+        Login
+      </Button>
+    );
+  }
+
+
+  return (
+    <NavDropdown
+      align="end"
+      title={<PersonCircle size={26} color="black" />}
+      id="user-dropdown"
+      className="ms-3"
+    >
+      <NavDropdown.Item style={{ fontWeight: "bold" }}>
+        {loggedUser?.nome || ""} {loggedUser?.cognome || ""}
+      </NavDropdown.Item>
+      <NavDropdown.Divider />
+      <NavDropdown.Item to="/me" as={Link}>
+        Profile
+      </NavDropdown.Item>
+
+      <NavDropdown.Item to="/" as={Link} onClick={logout}>
+        Logout
+      </NavDropdown.Item>
+    </NavDropdown>
+  );
+};
+
 export default function Header() {
   const { token, logout, loggedUser } = useAuthContext();
   const navigate = useNavigate();
