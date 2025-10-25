@@ -134,7 +134,7 @@ const UserProfile = () => {
   };
 
   return (
-    <div className="profile-bg py-4" style={{ minHeight: "100vh" }}>
+    <div className="profile-bg py-4" style={{ height: "100vh", marginTop: "65px", boxSizing: "content-box" }}>
       <Container>
         <Card className="shadow-lg border-0 rounded-4">
           {/* HEADER */}

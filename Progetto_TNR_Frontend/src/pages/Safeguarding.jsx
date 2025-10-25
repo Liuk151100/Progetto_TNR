@@ -75,7 +75,7 @@ const Safeguarding = () => {
       setSending(false);
     }
   };
-
+//style={{height: "100vh",marginTop: "65px",boxSizing: "content-box"}}
   return (
     <Container className="py-5">
       <h2 className="text-center mb-5 fw-bold text-uppercase">
@@ -87,7 +87,7 @@ const Safeguarding = () => {
         {documents.map((doc, index) => (
           <Col key={index} xs={12} sm={10} md={8} lg={6}>
             <Card className="shadow-sm h-100 border-0 rounded-3">
-              <Card.Body className="d-flex flex-column flex-md-row align-items-center justify-content-between gap-3">
+              <Card.Body>
                 <div className="d-flex align-items-center flex-grow-1 overflow-hidden">
                   <FileEarmarkPdf size={40} className="text-danger flex-shrink-0" />
                   <h6 className="ms-3 mb-0 text-truncate" style={{ whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>

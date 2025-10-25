@@ -89,7 +89,7 @@ const CreateUser = () => {
 
 
     return (
-        <div className="profile-bg" style={{ height: editMode ? "100vh" : "80vh" }}>
+        <div className="profile-bg" style={{ height: "100vh", marginTop: "65px",boxSizing: "content-box" }}>
             <Container className="py-4">
                 <Card className="shadow-lg profile-card">
                     <Card.Header className="d-flex justify-content-between align-items-center profile-header">
