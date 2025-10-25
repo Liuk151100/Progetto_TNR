@@ -1,5 +1,5 @@
-import React, { useEffect, useState} from 'react';
-import { Routes, Route, BrowserRouter, useLocation} from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Routes, Route, BrowserRouter, useLocation } from 'react-router-dom';
 import Header from './components/Header';
 import Home from './pages/Home';
 import Footer from './components/Footer';
@@ -34,12 +34,33 @@ export default function App() {
   //   setTheme(t => (t === 'dark' ? 'light' : 'dark'));
   // };
 
+
+
+  //questa crud ("scelta a caso") l'ho inserita per non fare andare in stand-by il servizio di backend
+  const eseguiCRUD = async () => {
+    try {
+      const response = await axiosInstance.get("/users");
+    } catch (e) {
+      console.log(`axios get users ${e}`);
+    }
+  }
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      eseguiCRUD()
+    }, 60000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+
+
   return (
 
     <BrowserRouter>
       <AuthProvider>
         {/* <div className={`app-root ${theme}`}> */}
-        <Header/>
+        <Header />
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path="/auth/google-callback" element={<GoogleCallback />} />
@@ -48,7 +69,7 @@ export default function App() {
           <Route path="/Login" element={<AuthPages />} />
           <Route path="/me" element={<UserProfile />} />
           <Route path="/newUser" element={<CreateUser />} />
-          <Route path="/safeguarding" element={<Safeguarding/>} />
+          <Route path="/safeguarding" element={<Safeguarding />} />
 
         </Routes>
         <Footer />
