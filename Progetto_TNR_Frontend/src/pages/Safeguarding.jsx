@@ -80,7 +80,7 @@ const Safeguarding = () => {
 
 
   return (
-    <Container style={{ marginTop: "70px", boxSizing: "border-box", width:"100vw" }}>
+    <Container style={{ marginTop: "100px", marginBottom:"20px", boxSizing: "border-box", width:"100vw" }}>
       <h2 className="text-center mb-5 fw-bold text-uppercase">
         Safeguarding e Documenti
       </h2>

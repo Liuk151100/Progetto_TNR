@@ -15,7 +15,7 @@ export default function Home() {
 
   if (location.state?.scrollTo === "team") {
     setTimeout(() => {
-      window.scrollTo({ top: 2600, behavior: "smooth" });
+      window.scrollTo({ top: 2400, behavior: "smooth" });
     }, 500);
     navigate("/",{ state: undefined })
 
