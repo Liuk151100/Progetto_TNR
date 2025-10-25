@@ -133,6 +133,12 @@ const UserProfile = () => {
     }
   };
 
+  if (user?.docPersonali?.length == 0) {
+    var notDocument = true
+  } else {
+    var notDocument = false
+  }
+
 
   return (
 
@@ -300,6 +306,7 @@ const UserProfile = () => {
             <PersonFill className="me-2" />
             Documenti Personali
           </h5>
+          {notDocument && (<p><b>Nessun documento caricato</b></p>)}
 
           <ListGroup>
             {user?.docPersonali?.map((doc, idx) => (
