@@ -87,9 +87,6 @@ const CreateUser = () => {
         }
     };
 
-    useEffect(()=> {
-    window.location.reload()
-  },[])
 
 
     return (

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Card, Button, Form, Alert } from "react-bootstrap";
 import { FileEarmarkPdf, Paperclip, Send } from "react-bootstrap-icons";
 import axiosInstance from "../../data/axios";
@@ -10,6 +10,7 @@ const Safeguarding = () => {
     messaggio: "",
     files: [],
   });
+
 
   const [alert, setAlert] = useState({ show: false, variant: "", text: "" });
   const [sending, setSending] = useState(false);
@@ -75,10 +76,6 @@ const Safeguarding = () => {
       setSending(false);
     }
   };
-
-  useEffect(()=> {
-    window.location.reload()
-  },[])
 
 
   return (

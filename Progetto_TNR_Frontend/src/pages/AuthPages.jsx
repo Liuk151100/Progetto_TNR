@@ -63,9 +63,7 @@ export default function AuthPages() {
     }
   };
 
-  useEffect(()=> {
-    window.location.reload()
-  },[])
+
 
   return (
     <div

@@ -133,10 +133,6 @@ const UserProfile = () => {
     }
   };
 
-  useEffect(()=> {
-    window.location.reload()
-  },[])
-
   return (
 
       <Container >
