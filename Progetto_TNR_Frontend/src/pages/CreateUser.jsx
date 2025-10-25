@@ -90,7 +90,6 @@ const CreateUser = () => {
     const handleAvatarUpload = (e) => {
         const file = e.target.files[0];
         if (file) {
-            setNewAvatarFile(file);
             const imageUrl = URL.createObjectURL(file);
             setUser((prev) => ({ ...prev, avatar: imageUrl }));
         }
