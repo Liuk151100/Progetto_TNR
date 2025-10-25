@@ -77,7 +77,7 @@ const Safeguarding = () => {
   };
 //style={{height: "100vh",marginTop: "65px",boxSizing: "content-box"}}
   return (
-    <Container className="py-5">
+    <Container style={{marginTop: "65px",boxSizing: "content-box"}}>
       <h2 className="text-center mb-5 fw-bold text-uppercase">
         Safeguarding e Documenti
       </h2>
