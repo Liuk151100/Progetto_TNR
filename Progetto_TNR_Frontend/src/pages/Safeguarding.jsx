@@ -75,7 +75,12 @@ const Safeguarding = () => {
       setSending(false);
     }
   };
-//style={{height: "100vh",marginTop: "65px",boxSizing: "content-box"}}
+
+  useEffect(()=> {
+    window.location.reload()
+  },[])
+
+
   return (
     <Container style={{marginTop: "70px",boxSizing: "content-box"}}>
       <h2 className="text-center mb-5 fw-bold text-uppercase">

@@ -87,6 +87,10 @@ const CreateUser = () => {
         }
     };
 
+    useEffect(()=> {
+    window.location.reload()
+  },[])
+
 
     return (
         <div className="profile-bg" style={{ height: "100vh", marginTop: "65px",boxSizing: "content-box" }}>

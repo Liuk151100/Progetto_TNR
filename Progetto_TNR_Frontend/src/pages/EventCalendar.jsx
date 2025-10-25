@@ -43,6 +43,10 @@ function EventCalendar() {
     }
   }, [token, loggedUser]);
 
+  useEffect(()=> {
+    window.location.reload()
+  },[])
+
   // --- Fetch eventi
   useEffect(() => {
     const fetchEvents = async () => {
