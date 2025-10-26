@@ -94,11 +94,22 @@ export async function createEvent(request, response) {
         che si terrà dal <b>${startFormatted}</b> al <b>${endFormatted}</b>, presso <b>${luogo}</b>. Saremmo molto felici se riuscissi a venire e condividere questo
         momento insieme a tutto lo staff.</p>
       `;
-            mailer.sendMail({
+            //Il mailer funz in locale, quando passo in produzione deve usare l'helper sendMail.js
+            // mailer.sendMail({
+            //     to: user.email,
+            //     subject: "Nuovo evento in programma",
+            //     html,
+            //     from: "amministrazione@teamnewracing.com",
+            // });
+
+            sendEmail({
                 to: user.email,
                 subject: "Nuovo evento in programma",
+                from: {
+                    email: "amministrazione@teamnewracing.com",
+                    name: "Team New Racing",
+                },
                 html,
-                from: "amministrazione@teamnewracing.com",
             });
         }
 
@@ -151,11 +162,23 @@ export async function modifyEvent(request, response) {
         <b>${updatedEvent.titolo}</b>, che si terrà dal <b>${startFormatted}</b> al <b>${endFormatted}</b>, presso <b>${updatedEvent.luogo}</b>.
         Ti aspettiamo per condividere questo momento insieme a tutto lo staff!</p>
       `;
-            mailer.sendMail({
+
+            //Il mailer funz in locale, quando passo in produzione deve usare l'helper sendMail.js
+            // mailer.sendMail({
+            //     to: user.email,
+            //     subject: "Aggiornamento evento in programma",
+            //     html,
+            //     from: "amministrazione@teamnewracing.com",
+            // });
+
+            sendEmail({
                 to: user.email,
                 subject: "Aggiornamento evento in programma",
+                from: {
+                    email: "amministrazione@teamnewracing.com",
+                    name: "Team New Racing",
+                },
                 html,
-                from: "amministrazione@teamnewracing.com",
             });
         }
 
@@ -191,17 +214,29 @@ export async function joinEvent(request, response) {
         }
 
         const user = await User.findById(userId);
-            const html = `
+        const html = `
           <h1>Conferma partecipazione</h1>
           <p>${user.nome} ${user.cognome} ha confermato la partecipazione all'evento <b>${event.titolo}</b>.</p>
         `;
 
-            mailer.sendMail({
-                to: "kartiva@icloud.com",
-                subject: `Conferma partecipazione evento ${event.titolo} di ${user.nome} ${user.cognome}`,
-                html,
-                from: "amministrazione@teamnewracing.com",
-            });
+        //Il mailer funz in locale, quando passo in produzione deve usare l'helper sendMail.js
+        // mailer.sendMail({
+        //     to: "kartiva@icloud.com",
+        //     subject: `Conferma partecipazione evento ${event.titolo} di ${user.nome} ${user.cognome}`,
+        //     html,
+        //     from: "amministrazione@teamnewracing.com",
+        // });
+
+
+        sendEmail({
+            to: "kartiva@icloud.com",
+            subject: `Conferma partecipazione evento ${event.titolo} di ${user.nome} ${user.cognome}`,
+            from: {
+                email: "amministrazione@teamnewracing.com",
+                name: "Team New Racing",
+            },
+            html,
+        });
 
         if (userExist) {
             response.status(200).json({ message: "Hai già inviato la partecipazione" });
@@ -245,11 +280,23 @@ export async function deleteEvent(request, response) {
         l'evento <b>${deletedEvent.titolo}</b> che si sarebbe tenuto dal <b>${startFormatted}</b> al <b>${endFormatted}</b>, presso <b>${deletedEvent.luogo}</b>.
         Riceverai una mail nel caso in cui l'evento verrà aggiunto di nuovo al calendario.</p>
       `;
-            mailer.sendMail({
+
+            //Il mailer funz in locale, quando passo in produzione deve usare l'helper sendMail.js
+            // mailer.sendMail({
+            //     to: user.email,
+            //     subject: "Cancellazione evento in programma",
+            //     html,
+            //     from: "amministrazione@teamnewracing.com",
+            // });
+
+            sendEmail({
                 to: user.email,
                 subject: "Cancellazione evento in programma",
+                from: {
+                    email: "amministrazione@teamnewracing.com",
+                    name: "Team New Racing",
+                },
                 html,
-                from: "amministrazione@teamnewracing.com",
             });
         }
 

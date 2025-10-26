@@ -20,12 +20,24 @@ export async function register(request, response) {
       <p>Nei prossimi giorni riceverai tutte le info su allenamenti, gare e comunicazioni del gruppo. Intanto rilassati, preparati e… allaccia le cinture: stiamo per partire!<p>
       <br>
     `;
-    
-    const infoMail = mailer.sendMail({
-      to: email, 
+
+    //Il mailer funz in locale, quando passo in produzione deve usare l'helper sendMail.js
+    // const infoMail = mailer.sendMail({
+    //   to: email,
+    //   subject: "Benvenuto nel Team",
+    //   html: html,
+    //   from: "amministrazione@teamnewracing.com",
+    // });
+
+
+    sendEmail({
+      to: email,
       subject: "Benvenuto nel Team",
-      html: html,
-      from: "amministrazione@teamnewracing.com", 
+      from: {
+        email: "amministrazione@teamnewracing.com",
+        name: "Team New Racing",
+      },
+      html,
     });
 
     console.log("Mail sent. MessageId:", infoMail.messageId);
@@ -40,7 +52,7 @@ export async function register(request, response) {
 export async function login(request, response) {
   const { email, password } = request.body;
 
-  const userMail = await User.findOne({ email }).select("+password"); 
+  const userMail = await User.findOne({ email }).select("+password");
   console.log('utente', userMail);
   console.log(password)
 
@@ -50,7 +62,7 @@ export async function login(request, response) {
       const jwt = await generateJWT({
         id: userMail._id,
       });
-      return response.status(200).json({message: 'Token generato con successo', jwt}); 
+      return response.status(200).json({ message: 'Token generato con successo', jwt });
     }
   }
 

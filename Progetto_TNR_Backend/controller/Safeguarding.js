@@ -25,7 +25,7 @@ export async function createsegn(request, response) {
         // });
 
         sendEmail({
-            to: "lucafaini20@gmail.com", //safeguarding.newracing@gmail.com
+            to: "safeguarding.newracing@gmail.com",
             subject: `Segnalazione Safeguarding ${nome}`,
             from: {
                 email: "amministrazione@teamnewracing.com",
