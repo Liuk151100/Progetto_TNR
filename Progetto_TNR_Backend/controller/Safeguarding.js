@@ -28,7 +28,7 @@ export async function createsegn(request, response) {
                 email: "amministrazione@teamnewracing.com",
                 name: "Team New Racing",
             },
-            html,
+            text: messaggio,
             replyTo: {
                 email: email
             },
