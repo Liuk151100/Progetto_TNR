@@ -3,6 +3,7 @@ import User from "../models/User.js"
 import mailer from "../helpers/mailer.js";
 import { uploadDocumenti } from "../middlewares/uploadCloudinary.js";
 import bcrypt from "bcrypt";
+import { sendEmail } from "./sendEmail.js";
 
 
 
@@ -64,14 +65,21 @@ export async function createUser(request, response) {
         </ul>
         <p>Le credenziali e tutti gli altri dati, una volta fatto il primo accesso, potranno essere modificato nella sezione del profilo in alto a destra</p>
       `;
-            mailer.sendMail({
+            //Il mailer funz in locale, quando passo in produzione deve usare l'helper sendMail.js
+            // mailer.sendMail({
+            //     to: newUser.email,
+            //     subject: "Benvenuto nel team",
+            //     html,
+            //     from: "amministrazione@teamnewracing.com",
+            // });
+
+            sendEmail({
                 to: newUser.email,
                 subject: "Benvenuto nel team",
                 html,
-                from: "amministrazione@teamnewracing.com",
             });
 
-            
+
         } else {
             const newUser = new User({ nome, cognome, email, password, dataDiNascita, avatar: avatarPath })
             const userSaved = await newUser.save()
@@ -86,11 +94,19 @@ export async function createUser(request, response) {
         </ul>
         <p>Le credenziali e tutti gli altri dati, una volta fatto il primo accesso, potranno essere modificato nella sezione del profilo in alto a destra</p>
       `;
-            mailer.sendMail({
+
+            //Il mailer funz in locale, quando passo in produzione deve usare l'helper sendMail.js
+            // mailer.sendMail({
+            //     to: newUser.email,
+            //     subject: "Benvenuto nel team",
+            //     html,
+            //     from: "amministrazione@teamnewracing.com",
+            // });
+
+            sendEmail({
                 to: newUser.email,
                 subject: "Benvenuto nel team",
                 html,
-                from: "amministrazione@teamnewracing.com",
             });
         }
 

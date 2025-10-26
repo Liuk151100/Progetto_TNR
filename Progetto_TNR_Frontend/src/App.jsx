@@ -36,22 +36,22 @@ export default function App() {
 
 
 
-  //questa crud ("scelta a caso") l'ho inserita per non fare andare in stand-by il servizio di backend
-  const eseguiCRUD = async () => {
-    try {
-      const response = await axiosInstance.get("/users");
-    } catch (e) {
-      console.log(`axios get users ${e}`);
-    }
-  }
+  // //questa crud ("scelta a caso") l'ho inserita per non fare andare in stand-by il servizio di backend
+  // const eseguiCRUD = async () => {
+  //   try {
+  //     const response = await axiosInstance.get("/users");
+  //   } catch (e) {
+  //     console.log(`axios get users ${e}`);
+  //   }
+  // }
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      eseguiCRUD()
-    }, 60000);
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     eseguiCRUD()
+  //   }, 60000);
 
-    return () => clearInterval(interval);
-  }, []);
+  //   return () => clearInterval(interval);
+  // }, []);
 
 
 
