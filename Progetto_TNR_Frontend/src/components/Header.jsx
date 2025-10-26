@@ -26,7 +26,7 @@ const UserMenu = ({ token, logout, loggedUser }) => {
         className="ms-3 fw-bold"
         style={{ borderRadius: "20px" }}
       >
-        Login//Register
+        Login / Register
       </Button>
     );
   }
