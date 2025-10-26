@@ -1,5 +1,6 @@
 import mailer from "../helpers/mailer.js";
 import multer from "multer";
+import { sendEmail } from "../helpers/sendMail.js";
 
 export async function createsegn(request, response) {
     try {
