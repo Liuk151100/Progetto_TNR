@@ -1,15 +1,16 @@
 import mailer from "../helpers/mailer.js";
 import multer from "multer";
 import { sendEmail } from "../helpers/sendMail.js";
+import fs from "fs";
 
 export async function createsegn(request, response) {
     try {
         console.log(request.body)
         const { nome, email, messaggio } = request.body;
         const allegati = request.files.map((f) => ({
-            content: fs.readFileSync(file.path).toString("base64"),
-            filename: file.originalname,
-            type: file.mimetype,
+            content: fs.readFileSync(f.path).toString("base64"),
+            filename: f.originalname,
+            type: f.mimetype,
             disposition: "attachment",
         }));
 
