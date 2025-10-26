@@ -25,11 +25,11 @@ const UserMenu = ({ token, logout, loggedUser }) => {
     return (
       <Button
         variant="dark"
-        size= "sm"
+        size="sm"
         as={Link}
         to="/Login"
         className="ms-3 fw-bold"
-        style={{ borderRadius: "20px", fontSize: {isMobile} ? "0.8rem" : "1rem"}}
+        style={{ borderRadius: "20px", fontSize: { isMobile } ? "0.8rem" : "1rem" }}
       >
         Login / Register
       </Button>
@@ -63,6 +63,12 @@ export default function Header() {
   const { token, logout, loggedUser } = useAuthContext();
   const navigate = useNavigate();
   const location = useLocation(); // ⬅️ serve per sapere quando cambia la pagina
+
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  // 🔹 Gestione responsive
+  const isMobile = windowWidth < 768;
+  const isTablet = windowWidth >= 768 && windowWidth < 1200;
 
   // Stato per gestire il menu mobile
   const [expanded, setExpanded] = useState(false);
@@ -116,7 +122,7 @@ export default function Header() {
               <img
                 src="/Loghi/LOGO-VETTORIALE-NEW-RACING.svg"
                 alt="Logo"
-                style={{ height: "50px", width: {isMobile} ? "125px" : "auto" }}
+                style={{ height: "50px", width: { isMobile } ? "125px" : "auto" }}
               />
             </Navbar.Brand>
           </Nav.Link>
