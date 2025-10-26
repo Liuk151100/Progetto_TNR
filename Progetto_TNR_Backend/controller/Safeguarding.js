@@ -10,17 +10,32 @@ export async function createsegn(request, response) {
             path: f.path,
         }));
 
+        //Il mailer funz in locale, quando passo in produzione deve usare l'helper sendMail.js
+        // const responseEmail = mailer.sendMail({
+        //     from: "amministrazione@teamnewracing.com",
+        //     to: "lucafaini20@gmail.com", //safeguarding.newracing@gmail.com
+        //     replyTo: email,
+        //     subject: `Segnalazione Safeguarding ${nome}`,
+        //     text: messaggio,
+        //     attachments: allegati,
+        // });
 
-        const responseEmail = mailer.sendMail({
-            from: "amministrazione@teamnewracing.com",
+        sendEmail({
             to: "lucafaini20@gmail.com", //safeguarding.newracing@gmail.com
-            replyTo: email,
             subject: `Segnalazione Safeguarding ${nome}`,
-            text: messaggio,
+            from: {
+                email: "amministrazione@teamnewracing.com",
+                name: "Team New Racing",
+            },
+            html,
+            replyTo: {
+                email: email
+            },
             attachments: allegati,
         });
 
-        emailConferma(nome, email)
+
+        emailConferma(nome, email, allegati)
 
         async function emailConferma(nome, email) {
 
@@ -29,12 +44,23 @@ export async function createsegn(request, response) {
         <p>Ciao ${nome}, il Team New Racing ha ricevuto la tua segnalazione e ti risponderà al più presto </p>
         <p>Grazie per la collaborazione</p>
       `;
+            //Il mailer funz in locale, quando passo in produzione deve usare l'helper sendMail.js
+            // mailer.sendMail({
+            //     from: "amministrazione@teamnewracing.com",
+            //     to: email,
+            //     subject: `Segnalazione Safeguarding Team New Racing`,
+            //     text: html,
+            //     attachments: allegati,
+            // });
 
-            mailer.sendMail({
-                from: "amministrazione@teamnewracing.com",
+            sendEmail({
                 to: email,
                 subject: `Segnalazione Safeguarding Team New Racing`,
-                text: html,
+                from: {
+                    email: "amministrazione@teamnewracing.com",
+                    name: "Team New Racing",
+                },
+                html,
                 attachments: allegati,
             });
 
