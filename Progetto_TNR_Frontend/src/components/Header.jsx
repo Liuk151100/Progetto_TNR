@@ -25,11 +25,11 @@ const UserMenu = ({ token, logout, loggedUser }) => {
     return (
       <Button
         variant="dark"
-        size= {isMobile ? "sm" : "xs"}
+        size= "sm"
         as={Link}
         to="/Login"
         className="ms-3 fw-bold"
-        style={{ borderRadius: "20px" }}
+        style={{ borderRadius: "20px", fontSize: {isMobile} ? "0.8rem" : "1rem"}}
       >
         Login / Register
       </Button>
