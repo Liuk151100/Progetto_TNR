@@ -116,7 +116,7 @@ export default function Header() {
               <img
                 src="/Loghi/LOGO-VETTORIALE-NEW-RACING.svg"
                 alt="Logo"
-                style={{ height: "50px", width: "auto" }}
+                style={{ height: "50px", width: {isMobile} ? "125px" : "auto" }}
               />
             </Navbar.Brand>
           </Nav.Link>
