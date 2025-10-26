@@ -106,6 +106,7 @@ export async function createUser(request, response) {
             sendEmail({
                 to: newUser.email,
                 subject: "Benvenuto nel team",
+                from: "amministrazione@teamnewracing.com",
                 html,
             });
         }
