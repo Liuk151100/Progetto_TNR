@@ -11,6 +11,7 @@ import GoogleCallback from './components/GoogleCallback';
 import UserProfile from './pages/Profile';
 import CreateUser from './pages/CreateUser';
 import Safeguarding from './pages/Safeguarding';
+import ScrollToTop from './components/ScrollToTop';
 
 
 export default function App() {
@@ -58,6 +59,7 @@ export default function App() {
   return (
 
     <BrowserRouter>
+    <ScrollToTop/>
       <AuthProvider>
         {/* <div className={`app-root ${theme}`}> */}
         <Header />
