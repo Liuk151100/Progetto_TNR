@@ -7,8 +7,10 @@ export async function createsegn(request, response) {
         console.log(request.body)
         const { nome, email, messaggio } = request.body;
         const allegati = request.files.map((f) => ({
-            filename: f.originalname,
-            path: f.path,
+            content: fs.readFileSync(file.path).toString("base64"),
+            filename: file.originalname,
+            type: file.mimetype,
+            disposition: "attachment",
         }));
 
         //Il mailer funz in locale, quando passo in produzione deve usare l'helper sendMail.js
