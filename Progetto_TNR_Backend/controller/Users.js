@@ -3,7 +3,7 @@ import User from "../models/User.js"
 import mailer from "../helpers/mailer.js";
 import { uploadDocumenti } from "../middlewares/uploadCloudinary.js";
 import bcrypt from "bcrypt";
-import { sendEmail } from "./sendEmail.js";
+import { sendEmail } from "../helpers/sendMail.js";
 
 
 
