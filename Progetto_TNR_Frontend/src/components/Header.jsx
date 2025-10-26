@@ -7,6 +7,11 @@ import { Link, useNavigate, useLocation } from "react-router-dom"; // ⬅️ agg
 const UserMenu = ({ token, logout, loggedUser }) => {
 
   const location = useLocation(); // ⬅️ serve per sapere quando cambia la pagina
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  // 🔹 Gestione responsive
+  const isMobile = windowWidth < 768;
+  const isTablet = windowWidth >= 768 && windowWidth < 1200;
 
   // Stato per gestire il menu mobile
   const [expanded, setExpanded] = useState(false);
@@ -20,7 +25,7 @@ const UserMenu = ({ token, logout, loggedUser }) => {
     return (
       <Button
         variant="dark"
-        size="sm"
+        size= {isMobile ? "sm" : "xs"}
         as={Link}
         to="/Login"
         className="ms-3 fw-bold"
