@@ -76,6 +76,10 @@ export async function createUser(request, response) {
             sendEmail({
                 to: newUser.email,
                 subject: "Benvenuto nel team",
+                 from: {
+                    email: "amministrazione@teamnewracing.com",
+                    name: "Team New Racing",
+                },
                 html,
             });
 
@@ -106,7 +110,10 @@ export async function createUser(request, response) {
             sendEmail({
                 to: newUser.email,
                 subject: "Benvenuto nel team",
-                from: "amministrazione@teamnewracing.com",
+                from: {
+                    email: "amministrazione@teamnewracing.com",
+                    name: "Team New Racing",
+                },
                 html,
             });
         }
