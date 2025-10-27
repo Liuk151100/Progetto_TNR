@@ -4,7 +4,7 @@ import axiosInstance from "../../data/axios";
 import { Card, Col, Container, Row } from "react-bootstrap";
 import { useAuthContext } from "../contexts/authContext";
 
-export default function TeamSection() {
+const TeamSection = forwardRef((props, ref) => {
     const [pilots, setPilots] = useState([]);
 
     async function getPilots() {
@@ -24,7 +24,7 @@ export default function TeamSection() {
     }, []);
 
     return (
-        <section className="team-section py-5">
+        <section ref={ref} className="team-section py-5">
             <Container>
                 <h2 className="text-center mb-5 fw-bold section-title">
                     Team
@@ -41,7 +41,7 @@ export default function TeamSection() {
                             className="d-flex justify-content-center"
                         >
                             <Card className="pilot-card shadow-sm">
-                                <div className="pilot-img-wrapper" style={{height:"80%"}}>
+                                <div className="pilot-img-wrapper" style={{ height: "80%" }}>
                                     <Card.Img
                                         variant="top"
                                         src={pilot.avatar || "/placeholder.jpg"}
@@ -57,7 +57,7 @@ export default function TeamSection() {
                                         {pilot.dataDiNascita}
                                     </Card.Text>
                                     <Card.Text>
-                                        {pilot.ruolo!= "Admin" ? `${pilot.ruolo} ${pilot.categoria}`:"Presidente e pilota di kart"}
+                                        {pilot.ruolo != "Admin" ? `${pilot.ruolo} ${pilot.categoria}` : "Presidente e pilota di kart"}
                                     </Card.Text>
                                 </Card.Body>
                             </Card>
@@ -67,4 +67,6 @@ export default function TeamSection() {
             </Container>
         </section>
     );
-}
+})
+
+export default TeamSection
