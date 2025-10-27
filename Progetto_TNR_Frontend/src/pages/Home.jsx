@@ -4,21 +4,27 @@ import KartSection from "../components/KartSection";
 import LegendsSection from "../components/LegendsSection";
 import TeamSection from "../components/TeamSection";
 import ContactUs from "../components/ContactUs";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 export default function Home() {
 
 
   const location = useLocation();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  // ref per la sezione Team
+  const teamRef = useRef(null);
 
-  if (location.state?.scrollTo === "team") {
-    setTimeout(() => {
-      window.scrollTo({ top: 2400, behavior: "smooth" });
-    }, 500);
-    navigate("/",{ state: undefined })
 
+  // se arriviamo con lo stato scrollTo = "team"
+  if (location.state?.scrollTo === "team" && teamRef.current) {
+    teamRef.current.scrollIntoView({ behavior: "smooth" });
+
+    // opzionale: rimuove lo state dopo lo scroll (evita scroll non voluti se torni indietro)
+    navigate(location.pathname, { replace: true, state: {} });
+  } else {
+    // scroll all’inizio di default
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
   useEffect(() => {
