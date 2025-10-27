@@ -10,8 +10,8 @@ const UserMenu = ({ token, logout, loggedUser }) => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   // 🔹 Gestione responsive
-  const isMobileL = windowWidth <= 425;
-  const isMobileM = windowWidth <= 375;
+  const isMobileL = windowWidth > 375 && windowWidth <= 425 ;
+  const isMobileM = windowWidth > 320 && windowWidth <= 375;
   const isMobileS = windowWidth <= 320;
 
   // Stato per gestire il menu mobile
@@ -68,8 +68,8 @@ export default function Header() {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   // 🔹 Gestione responsive
-  const isMobileL = windowWidth <= 425;
-  const isMobileM = windowWidth <= 375;
+  const isMobileL = windowWidth > 375 && windowWidth <= 425 ;
+  const isMobileM = windowWidth > 320 && windowWidth <= 375;
   const isMobileS = windowWidth <= 320;
 
   // Stato per gestire il menu mobile
