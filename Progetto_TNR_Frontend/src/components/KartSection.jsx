@@ -67,7 +67,8 @@ export default function KartSection() {
         height: "100vh",
         overflow: "hidden",
         position: "relative",
-        border: "3px solid white",
+        borderTop: "3px solid white",
+        borderBottom: "3px solid white",
       }}
     >
       {/* 🔹 Layer immagine corrente */}

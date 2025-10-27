@@ -10,8 +10,9 @@ const UserMenu = ({ token, logout, loggedUser }) => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   // 🔹 Gestione responsive
-  const isMobile = windowWidth < 768;
-  const isTablet = windowWidth >= 768 && windowWidth < 1200;
+  const isMobileL = windowWidth <= 425;
+  const isMobileM = windowWidth <= 375;
+  const isMobileS = windowWidth <= 320;
 
   // Stato per gestire il menu mobile
   const [expanded, setExpanded] = useState(false);
@@ -29,7 +30,7 @@ const UserMenu = ({ token, logout, loggedUser }) => {
         as={Link}
         to="/Login"
         className="ms-3 fw-bold"
-        style={{ borderRadius: "20px", fontSize: { isMobile } ? "0.8rem" : "1rem" }}
+        style={{ borderRadius: "20px", fontSize: { isMobileL } ? "0.8rem" : { isMobileM } ? "0.7rem" : { isMobileS } ? "0.5rem" : "1rem" }}
       >
         Login / Register
       </Button>
@@ -67,8 +68,9 @@ export default function Header() {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   // 🔹 Gestione responsive
-  const isMobile = windowWidth < 768;
-  const isTablet = windowWidth >= 768 && windowWidth < 1200;
+  const isMobileL = windowWidth <= 425;
+  const isMobileM = windowWidth <= 375;
+  const isMobileS = windowWidth <= 320;
 
   // Stato per gestire il menu mobile
   const [expanded, setExpanded] = useState(false);
@@ -122,7 +124,7 @@ export default function Header() {
               <img
                 src="/Loghi/LOGO-VETTORIALE-NEW-RACING.svg"
                 alt="Logo"
-                style={{ height: "50px", width: { isMobile } ? "125px" : "auto" }}
+                style={{ height: "50px", width: { isMobileL } ? "125px" : { isMobileM } ? "115px" : { isMobileS } ? "90px" : "auto" }}
               />
             </Navbar.Brand>
           </Nav.Link>
