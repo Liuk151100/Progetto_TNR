@@ -15,18 +15,17 @@ export default function Home() {
   // ref per la sezione Team
   const teamRef = useRef(null);
 
-  useEffect(() => {
-    // se arriviamo con lo stato scrollTo = "team"
-    if (location.state?.scrollTo === "team") {
-      teamRef.current.scrollIntoView({ behavior: "smooth" });
+  // se arriviamo con lo stato scrollTo = "team"
+  if (location.state?.scrollTo === "team") {
+    teamRef.current.scrollIntoView({ behavior: "smooth" });
 
-      // opzionale: rimuove lo state dopo lo scroll (evita scroll non voluti se torni indietro)
-      navigate(location.pathname, { replace: true, state: {} });
-    } else {
-      // scroll all’inizio di default
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-  }, [location, navigate]);
+    // opzionale: rimuove lo state dopo lo scroll (evita scroll non voluti se torni indietro)
+    navigate(location.pathname, { replace: true, state: {} });
+  } else {
+    // scroll all’inizio di default
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
 
   useEffect(() => {
     window.scrollTo({
@@ -41,7 +40,7 @@ export default function Home() {
       <KartSection />
       <LegendsSection />
       <HillclimbSection />
-      <TeamSection />
+      <TeamSection ref={teamRef}/>
       <ContactUs />
     </>
   );
