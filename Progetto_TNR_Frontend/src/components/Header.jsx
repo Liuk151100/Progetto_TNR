@@ -39,7 +39,7 @@ const UserMenu = ({ token, logout, loggedUser }) => {
         as={Link}
         to="/Login"
         className="ms-3 fw-bold"
-        style={{ borderRadius: "20px", fontSize: { fontSize } }}
+        style={{ borderRadius: "20px", fontSize: fontSize }}
       >
         Login / Register
       </Button>
@@ -142,7 +142,7 @@ export default function Header() {
               <img
                 src="/Loghi/LOGO-VETTORIALE-NEW-RACING.svg"
                 alt="Logo"
-                style={{ height: "50px", width: { widthLogo } }}
+                style={{ height: "50px", width: widthLogo }}
               />
             </Navbar.Brand>
           </Nav.Link>
