@@ -15,7 +15,7 @@ const UserMenu = ({ token, logout, loggedUser }) => {
     fontSize = "0.5rem"
   } else if (windowWidth > 320 && windowWidth <= 375) {
     fontSize = "0.7rem"
-  } else if (windowWidth > 375 && windowWidth <= 425) {
+  } else if (windowWidth > 375 && windowWidth <= 500) {
     fontSize = "0.8rem"
   } else {
     fontSize = "1rem"
@@ -84,7 +84,7 @@ export default function Header() {
     widthLogo = "90px"
   } else if (windowWidth > 320 && windowWidth <= 375) {
     widthLogo = "115px"
-  } else if (windowWidth > 375 && windowWidth <= 425) {
+  } else if (windowWidth > 375 && windowWidth <= 500) {
     widthLogo = "125px"
   } else {
     widthLogo = "auto"
