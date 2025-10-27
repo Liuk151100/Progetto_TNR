@@ -8,11 +8,20 @@ const UserMenu = ({ token, logout, loggedUser }) => {
 
   const location = useLocation(); // ⬅️ serve per sapere quando cambia la pagina
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [fontSize, setFontSize] = useState("")
 
   // 🔹 Gestione responsive
-  const isMobileL = windowWidth > 375 && windowWidth <= 425 ;
-  const isMobileM = windowWidth > 320 && windowWidth <= 375;
-  const isMobileS = windowWidth <= 320;
+  if (windowWidth <= 320) {
+    setFontSize("0.5rem")
+  } else if (windowWidth > 320 && windowWidth <= 375) {
+    setFontSize("0.7rem")
+  } else if (windowWidth > 375 && windowWidth <= 425) {
+    setFontSize("0.8rem")
+  } else {
+    setFontSize("1rem")
+  }
+
+  
 
   // Stato per gestire il menu mobile
   const [expanded, setExpanded] = useState(false);
@@ -30,7 +39,7 @@ const UserMenu = ({ token, logout, loggedUser }) => {
         as={Link}
         to="/Login"
         className="ms-3 fw-bold"
-        style={{ borderRadius: "20px", fontSize: { isMobileL } ? "0.8rem" : { isMobileM } ? "0.7rem" : { isMobileS } ? "0.5rem" : "1rem" }}
+        style={{ borderRadius: "20px", fontSize: {fontSize} }}
       >
         Login / Register
       </Button>
@@ -68,9 +77,18 @@ export default function Header() {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   // 🔹 Gestione responsive
-  const isMobileL = windowWidth > 375 && windowWidth <= 425 ;
-  const isMobileM = windowWidth > 320 && windowWidth <= 375;
-  const isMobileS = windowWidth <= 320;
+    const [widthLogo, setWidthLogo] = useState("")
+
+  // 🔹 Gestione responsive
+  if (windowWidth <= 320) {
+    setWidthLogo("90px")
+  } else if (windowWidth > 320 && windowWidth <= 375) {
+    setWidthLogo("115px")
+  } else if (windowWidth > 375 && windowWidth <= 425) {
+    setWidthLogo("125px")
+  } else {
+    setWidthLogo("auto")
+  }
 
   // Stato per gestire il menu mobile
   const [expanded, setExpanded] = useState(false);
@@ -124,7 +142,7 @@ export default function Header() {
               <img
                 src="/Loghi/LOGO-VETTORIALE-NEW-RACING.svg"
                 alt="Logo"
-                style={{ height: "50px", width: { isMobileL } ? "125px" : { isMobileM } ? "115px" : { isMobileS } ? "90px" : "auto" }}
+                style={{ height: "50px", width: {widthLogo} }}
               />
             </Navbar.Brand>
           </Nav.Link>
