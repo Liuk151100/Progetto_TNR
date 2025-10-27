@@ -19,8 +19,10 @@ export default function Home() {
     // se arriviamo con lo stato scrollTo = "team"
     if (location.state?.scrollTo === "team" && teamRef.current) {
       console.log(teamRef)
-      teamRef.current.scrollIntoView({ behavior: "smooth" });
-
+      // piccolo delay per permettere al DOM di stabilizzarsi
+      setTimeout(() => {
+        teamRef.current.scrollIntoView({ behavior: "smooth" });
+      }, 300);
       // opzionale: rimuove lo state dopo lo scroll (evita scroll non voluti se torni indietro)
       navigate(location.pathname, { replace: true, state: {} });
     } else {
