@@ -25,7 +25,7 @@ const TeamSection = forwardRef((props, ref) => {
 
     return (
         <section ref={ref} className="team-section py-5">
-            <Container>
+            <Container style={{marginTop:"30px"}}>
                 <h2 className="text-center mb-5 fw-bold section-title">
                     Team
                 </h2>
