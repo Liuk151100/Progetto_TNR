@@ -18,6 +18,7 @@ export default function Home() {
   useEffect(() => {
     // se arriviamo con lo stato scrollTo = "team"
     if (location.state?.scrollTo === "team" && teamRef.current) {
+      console.log(teamRef)
       teamRef.current.scrollIntoView({ behavior: "smooth" });
 
       // opzionale: rimuove lo state dopo lo scroll (evita scroll non voluti se torni indietro)
