@@ -21,7 +21,7 @@ export default function TeamSection() {
 
     useEffect(() => {
         getPilots();
-    }, [pilots]);
+    }, []);
 
     return (
         <section className="team-section py-5">
