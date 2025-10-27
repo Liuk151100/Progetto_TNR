@@ -8,20 +8,20 @@ const UserMenu = ({ token, logout, loggedUser }) => {
 
   const location = useLocation(); // ⬅️ serve per sapere quando cambia la pagina
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  const [fontSize, setFontSize] = useState("")
+  let fontSize = ""
 
   // 🔹 Gestione responsive
   if (windowWidth <= 320) {
-    setFontSize("0.5rem")
+    fontSize = "0.5rem"
   } else if (windowWidth > 320 && windowWidth <= 375) {
-    setFontSize("0.7rem")
+    fontSize = "0.7rem"
   } else if (windowWidth > 375 && windowWidth <= 425) {
-    setFontSize("0.8rem")
+    fontSize = "0.8rem"
   } else {
-    setFontSize("1rem")
+    fontSize = "1rem"
   }
 
-  
+
 
   // Stato per gestire il menu mobile
   const [expanded, setExpanded] = useState(false);
@@ -39,7 +39,7 @@ const UserMenu = ({ token, logout, loggedUser }) => {
         as={Link}
         to="/Login"
         className="ms-3 fw-bold"
-        style={{ borderRadius: "20px", fontSize: {fontSize} }}
+        style={{ borderRadius: "20px", fontSize: { fontSize } }}
       >
         Login / Register
       </Button>
@@ -77,17 +77,17 @@ export default function Header() {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   // 🔹 Gestione responsive
-    const [widthLogo, setWidthLogo] = useState("")
+  let widthLogo = ""
 
   // 🔹 Gestione responsive
   if (windowWidth <= 320) {
-    setWidthLogo("90px")
+    widthLogo = "90px"
   } else if (windowWidth > 320 && windowWidth <= 375) {
-    setWidthLogo("115px")
+    widthLogo = "115px"
   } else if (windowWidth > 375 && windowWidth <= 425) {
-    setWidthLogo("125px")
+    widthLogo = "125px"
   } else {
-    setWidthLogo("auto")
+    widthLogo = "auto"
   }
 
   // Stato per gestire il menu mobile
@@ -142,7 +142,7 @@ export default function Header() {
               <img
                 src="/Loghi/LOGO-VETTORIALE-NEW-RACING.svg"
                 alt="Logo"
-                style={{ height: "50px", width: {widthLogo} }}
+                style={{ height: "50px", width: { widthLogo } }}
               />
             </Navbar.Brand>
           </Nav.Link>
